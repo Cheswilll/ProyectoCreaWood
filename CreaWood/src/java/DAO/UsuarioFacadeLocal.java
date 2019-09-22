@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Usuario;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface UsuarioFacadeLocal {
 
     void create(Usuario usuario);
@@ -29,4 +30,6 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
+    Usuario login(Long noidentificacion, String contraseña);
+
 }

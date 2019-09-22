@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,10 +45,13 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "idProducto")
     private Integer idProducto;
+    @Size(max = 45)
     @Column(name = "nombre")
     private String nombre;
+    @Size(max = 45)
     @Column(name = "precio")
     private String precio;
+    @Size(max = 45)
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(mappedBy = "idProducto", fetch = FetchType.LAZY)

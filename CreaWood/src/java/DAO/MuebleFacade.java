@@ -6,6 +6,7 @@
 package DAO;
 
 import Entities.Mueble;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,7 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author wmoramor
  */
-@javax.ejb.Stateless
+@Stateless
 public class MuebleFacade extends AbstractFacade<Mueble> implements MuebleFacadeLocal {
 
     @PersistenceContext(unitName = "CreaWoodPU")

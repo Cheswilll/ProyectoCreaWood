@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.TipoIdentificacion;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface TipoIdentificacionFacadeLocal {
 
     void create(TipoIdentificacion tipoIdentificacion);

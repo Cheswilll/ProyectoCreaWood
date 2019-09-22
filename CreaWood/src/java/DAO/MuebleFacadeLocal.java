@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Mueble;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface MuebleFacadeLocal {
 
     void create(Mueble mueble);

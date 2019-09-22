@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Tipo;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface TipoFacadeLocal {
 
     void create(Tipo tipo);

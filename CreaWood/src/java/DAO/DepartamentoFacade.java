@@ -6,6 +6,7 @@
 package DAO;
 
 import Entities.Departamento;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,7 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author wmoramor
  */
-@javax.ejb.Stateless
+@Stateless
 public class DepartamentoFacade extends AbstractFacade<Departamento> implements DepartamentoFacadeLocal {
 
     @PersistenceContext(unitName = "CreaWoodPU")

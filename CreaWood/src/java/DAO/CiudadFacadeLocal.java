@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Ciudad;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface CiudadFacadeLocal {
 
     void create(Ciudad ciudad);

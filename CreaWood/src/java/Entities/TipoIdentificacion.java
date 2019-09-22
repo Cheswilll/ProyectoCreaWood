@@ -19,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,8 +45,11 @@ public class TipoIdentificacion implements Serializable {
     @Column(name = "idTipoIdentificacion")
     private Integer idTipoIdentificacion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nombreTipo")
     private String nombreTipo;
+    @Size(max = 45)
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoDoc", fetch = FetchType.LAZY)

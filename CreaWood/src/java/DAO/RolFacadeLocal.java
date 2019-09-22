@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Rol;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface RolFacadeLocal {
 
     void create(Rol rol);

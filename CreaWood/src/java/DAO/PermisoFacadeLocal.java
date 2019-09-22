@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Permiso;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface PermisoFacadeLocal {
 
     void create(Permiso permiso);

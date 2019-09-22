@@ -21,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,6 +45,7 @@ public class Mueble implements Serializable {
     @Column(name = "idMueble")
     private Integer idMueble;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "valor")
     private double valor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "muebleidMueble", fetch = FetchType.LAZY)

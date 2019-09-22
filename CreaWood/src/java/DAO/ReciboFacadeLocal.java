@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Recibo;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface ReciboFacadeLocal {
 
     void create(Recibo recibo);

@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -40,6 +42,8 @@ public class Color implements Serializable {
     @Column(name = "idColor")
     private Integer idColor;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "nombre_color")
     private String nombreColor;
     @JoinColumn(name = "Mueble_idMueble", referencedColumnName = "idMueble")

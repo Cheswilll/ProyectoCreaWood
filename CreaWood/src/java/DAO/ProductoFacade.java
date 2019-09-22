@@ -6,6 +6,7 @@
 package DAO;
 
 import Entities.Producto;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,7 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author wmoramor
  */
-@javax.ejb.Stateless
+@Stateless
 public class ProductoFacade extends AbstractFacade<Producto> implements ProductoFacadeLocal {
 
     @PersistenceContext(unitName = "CreaWoodPU")

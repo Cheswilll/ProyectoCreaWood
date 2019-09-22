@@ -21,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,6 +46,8 @@ public class Ciudad implements Serializable {
     @Column(name = "idCiudad")
     private Integer idCiudad;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "nombre_ciudad")
     private String nombreCiudad;
     @JoinColumn(name = "Departamento_idDepartamento1", referencedColumnName = "idDepartamento")

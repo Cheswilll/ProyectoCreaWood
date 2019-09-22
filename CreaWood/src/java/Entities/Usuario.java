@@ -13,8 +13,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -25,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,57 +37,72 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     , @NamedQuery(name = "Usuario.findByNroDoc", query = "SELECT u FROM Usuario u WHERE u.nroDoc = :nroDoc")
     , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
     , @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido")
     , @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")
-    , @NamedQuery(name = "Usuario.findByContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.contrase\u00f1a = :contrase\u00f1a")
+    , @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT u FROM Usuario u WHERE u.contrasena = :contrasena")
     , @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion")
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")
     , @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")
     , @NamedQuery(name = "Usuario.findByFechaCreacion", query = "SELECT u FROM Usuario u WHERE u.fechaCreacion = :fechaCreacion")
-    , @NamedQuery(name = "Usuario.findByFechaActualizacion", query = "SELECT u FROM Usuario u WHERE u.fechaActualizacion = :fechaActualizacion")})
+    , @NamedQuery(name = "Usuario.findByFechaActualizacion", query = "SELECT u FROM Usuario u WHERE u.fechaActualizacion = :fechaActualizacion")
+    , @NamedQuery(name = "Usuario.findLogin", query = "SELECT u FROM Usuario u WHERE u.nroDoc = :noIdentificacion AND u.contrasena = :contraseña")
+    , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idUsuario")
-    private Integer idUsuario;
-    @Basic(optional = false)
+    @NotNull
     @Column(name = "nro_doc")
-    private long nroDoc;
+    private Long nroDoc;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "correo")
     private String correo;
     @Basic(optional = false)
-    @Column(name = "contrase\u00f1a")
-    private String contraseña;
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "contrasena")
+    private String contrasena;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
     @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "telefono")
     private String telefono;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "genero")
     private int genero;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.DATE)
     private Date fechaActualizacion;
+    @Column(name = "estado")
+    private Integer estado;
     @ManyToMany(mappedBy = "usuarioList", fetch = FetchType.LAZY)
     private List<Rol> rolList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioidUsuario", fetch = FetchType.LAZY)
@@ -102,17 +117,16 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuario(Long nroDoc) {
+        this.nroDoc = nroDoc;
     }
 
-    public Usuario(Integer idUsuario, long nroDoc, String nombre, String apellido, String correo, String contraseña, String direccion, String telefono, int genero, Date fechaCreacion, Date fechaActualizacion) {
-        this.idUsuario = idUsuario;
+    public Usuario(Long nroDoc, String nombre, String apellido, String correo, String contrasena, String direccion, String telefono, int genero, Date fechaCreacion, Date fechaActualizacion) {
         this.nroDoc = nroDoc;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono = telefono;
         this.genero = genero;
@@ -120,19 +134,11 @@ public class Usuario implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public long getNroDoc() {
+    public Long getNroDoc() {
         return nroDoc;
     }
 
-    public void setNroDoc(long nroDoc) {
+    public void setNroDoc(Long nroDoc) {
         this.nroDoc = nroDoc;
     }
 
@@ -160,12 +166,12 @@ public class Usuario implements Serializable {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getDireccion() {
@@ -208,6 +214,14 @@ public class Usuario implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
     @XmlTransient
     public List<Rol> getRolList() {
         return rolList;
@@ -245,7 +259,7 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        hash += (nroDoc != null ? nroDoc.hashCode() : 0);
         return hash;
     }
 
@@ -256,7 +270,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if ((this.nroDoc == null && other.nroDoc != null) || (this.nroDoc != null && !this.nroDoc.equals(other.nroDoc))) {
             return false;
         }
         return true;
@@ -264,7 +278,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "Entities.Usuario[ nroDoc=" + nroDoc + " ]";
     }
     
 }

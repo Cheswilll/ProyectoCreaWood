@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Producto;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface ProductoFacadeLocal {
 
     void create(Producto producto);

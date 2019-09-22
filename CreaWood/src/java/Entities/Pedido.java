@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,14 +46,17 @@ public class Pedido implements Serializable {
     @Column(name = "idpedido")
     private Integer idpedido;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
     @Column(name = "estado_pedido")
     private String estadoPedido;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "valor")
     private double valor;
     @OneToMany(mappedBy = "idPedido", fetch = FetchType.LAZY)
     private List<Recibo> reciboList;
-    @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "idUsuario")
+    @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "nro_doc")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuarioidUsuario;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")

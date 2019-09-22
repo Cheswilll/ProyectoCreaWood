@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Departamento;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface DepartamentoFacadeLocal {
 
     void create(Departamento departamento);

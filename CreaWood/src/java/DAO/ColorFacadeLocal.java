@@ -7,12 +7,13 @@ package DAO;
 
 import Entities.Color;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author wmoramor
  */
-@javax.ejb.Local
+@Local
 public interface ColorFacadeLocal {
 
     void create(Color color);
